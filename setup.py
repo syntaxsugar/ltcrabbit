@@ -1,5 +1,3 @@
-from ltcrabbit import __version__
-
 try:
     from setuptools import setup
 except ImportError:
@@ -7,7 +5,7 @@ except ImportError:
 
 setup(
     name='ltcrabbit',
-    version=__version__,
+    version='0.1.1',
     author='Jaromir Fojtu',
     author_email='jaromir.fojtu@gmail.com',
     url='https://github.com/syntaxsugar/ltcrabbit',

@@ -1,8 +1,6 @@
 __all__ = ["LtcRabbit"]
-__version__ = "0.1"
 
 import requests
-
 
 class LtcRabbit(object):
     """Main class to access LTCRabbit.com API.
