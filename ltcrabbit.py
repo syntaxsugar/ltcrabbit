@@ -31,13 +31,12 @@ class LtcRabbit(object):
         payload['action'] = action
 
         r = requests.get(self.url, params=payload)
-        pprint.pprint(r.url)
 
         return r.json()
 
-    def get_worker_list(self):
+    def get_appdata(self):
 
-        return self.call('getappdata')['getappdata']['worker']
+        return self.call('getappdata')['getappdata']
 
     def add_worker(self, workerlist=[]):
         """Add Workers
