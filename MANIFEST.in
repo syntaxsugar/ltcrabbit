@@ -1,0 +1,3 @@
+include *.txt *.rst *.md LICENSE
+recursive-include *.txt *.py *.rst
+recursive-exclude . *.pyc
