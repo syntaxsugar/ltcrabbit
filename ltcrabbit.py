@@ -1,4 +1,5 @@
 __all__ = ["LtcRabbit"]
+__version__ = "0.1.2"
 
 import requests
 
