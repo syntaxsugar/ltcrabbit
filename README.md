@@ -9,7 +9,12 @@ Requirements
 * `docopt`_ library
 * `prettytable`_ library
 
-Usage
-=====
+# Usage
+
+### Worker List
 
     ltcrabbit-cli worker list --apikey=<your_api_key>
+
+### User Info
+
+    ltcrabbit-cli user --apikey=<your_api_key>

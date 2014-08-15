@@ -5,7 +5,7 @@ except ImportError:
 
 setup(
     name='ltcrabbit',
-    version='0.2.0',
+    version='0.2.1',
     author='Jaromir Fojtu',
     author_email='jaromir.fojtu@gmail.com',
     url='https://github.com/syntaxsugar/ltcrabbit',
