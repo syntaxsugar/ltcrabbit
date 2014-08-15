@@ -22,4 +22,8 @@ Requirements
 ### Pool Info
     
     ltcrabbit-cli pool --apikey=<your_api_key>
+
+### Earnings
+    
+    ltcrabbit-cli earnings  --apikey=<your_api_key>
     
