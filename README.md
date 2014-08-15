@@ -18,3 +18,8 @@ Requirements
 ### User Info
 
     ltcrabbit-cli user --apikey=<your_api_key>
+    
+### Pool Info
+    
+    ltcrabbit-cli pool --apikey=<your_api_key>
+    
