@@ -31,3 +31,7 @@ Requirements
     
     ltcrabbit-cli btc_exchange_rates --apikey=<your_api_key>
     
+### LTC Exchange Rates
+    
+    ltcrabbit-cli ltc_exchange_rates --apikey=<your_api_key>
+    

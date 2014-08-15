@@ -1,0 +1,124 @@
+#!/usr/bin/env python
+"""Naval Fate.
+
+Usage:
+  ltcrabbit-cli worker list (--apikey=<api_key>)
+  ltcrabbit-cli user (--apikey=<api_key>)
+  ltcrabbit-cli pool (--apikey=<api_key>)
+  ltcrabbit-cli earnings (--apikey=<api_key>)
+  ltcrabbit-cli btc_exchange_rates (--apikey=<api_key>)
+  ltcrabbit-cli -h | --help
+  ltcrabbit-cli --version
+
+Options:
+  -h --help     Show this screen.
+  --version     Show version.
+  --apikey=<api_key>      API Key
+
+"""
+
+from ltcrabbit import LtcRabbit, __version__
+from prettytable import PrettyTable
+from docopt import docopt
+
+
+def worker_list(api_key):
+    ltcrabbit_api = LtcRabbit(api_key)
+
+    data = ltcrabbit_api.get_appdata()
+
+    x = PrettyTable(["Name", "Hashrate", "Active", "Monitoring", "Algo"])
+
+    for row in data['worker']:
+        line = [row['name'], row['hashrate'], row['active'], row['monitoring'], row['algo']]
+        x.add_row(line)
+
+    print x
+
+def user(api_key):
+    ltcrabbit_api = LtcRabbit(api_key)
+
+    data = ltcrabbit_api.get_appdata()
+
+    x = PrettyTable(['Username', 'Balance', 'Hashrate (SCRYPT)', 'Hashrate (X11)', 'Invalid Shares (SCRYPT)', 'Invalid Shares (X11)'])
+
+    row = data['user']
+
+    x.add_row([row['username'], "%s LTC" % row['balance'], "%s KH/s" % row['hashrate_scrypt'],
+               "%s KH/s" % row['hashrate_x11'], "%s %%" % row['invalid_shares_scrypt'], "%s %%" % row['invalid_shares_x11']])
+    print x
+
+
+def pool(api_key):
+    ltcrabbit_api = LtcRabbit(api_key)
+
+    data = ltcrabbit_api.get_appdata()
+    row = data['pool']
+
+    x = PrettyTable(['Hashrate (SCRYPT)', 'Hashrate (X11)', 'Workers', 'LTC MH (SCRYPT)', 'LTC MH (X11)', 'ALT Bonus'])
+
+    x.add_row(["%s KH/s" % row['hashrate_scrypt'], '%s KH/s' % row['hashrate_x11'], row['workers'],
+               "%s LTC" % row['ltc_mh_scrypt'],
+               "%s LTC" % row['ltc_mh_x11'], "%s %%" % row['alt_bonus']])
+
+    print x
+
+
+def earnings(api_key):
+    ltcrabbit_api = LtcRabbit(api_key)
+
+    data = ltcrabbit_api.get_appdata()
+    row = data['earnings']
+
+    x = PrettyTable(['24H Total', '24H Basis', '24H Alt', '24H Affiliate', '48H Total', '48H basis', '48H Alt', '48H Affiliate'])
+
+    x.add_row(["%s LTC" % row['24h_total'], "%s LTC" % row['24h_basis'], "%s LTC" % row['24h_alt'], "%s LTC" % row['24h_affiliate'],
+               "%s LTC" % row['48h_total'], "%s LTC" % row['48h_basis'], "%s LTC" % row['48h_alt'], "%s LTC" % row['48h_affiliate']])
+
+    print x
+
+
+def btc_exchange_rates(api_key):
+    ltcrabbit_api = LtcRabbit(api_key)
+
+    data = ltcrabbit_api.get_appdata()
+    row = data['btc_exchange_rates']
+
+    x = PrettyTable(['USD', 'EUR'])
+    x.add_row(["%s USD" % row['USD'], "%s EUR" % row['EUR']])
+
+    print x
+
+
+def ltc_exchange_rates(api_key):
+    ltcrabbit_api = LtcRabbit(api_key)
+
+    data = ltcrabbit_api.get_appdata()
+    row = data['ltc_exchange_rates']
+
+    x = PrettyTable(['USD', 'EUR'])
+    x.add_row(["%s USD" % row['USD'], "%s EUR" % row['EUR']])
+
+    print x
+
+
+def main(arguments):
+    api_key = arguments['--apikey']
+    if arguments['worker']:
+        if arguments['list']:
+            worker_list(api_key)
+    elif arguments['user']:
+        user(api_key)
+    elif arguments['pool']:
+        pool(api_key)
+    elif arguments['earnings']:
+        earnings(api_key)
+    elif arguments['btc_exchange_rates']:
+        btc_exchange_rates(api_key)
+    elif arguments['ltc_exchange_rates']:
+        ltc_exchange_rates(api_key)
+
+
+if __name__ == '__main__':
+    arguments = docopt(__doc__, version='LTCRabbit %s' % __version__)
+    main(arguments)
