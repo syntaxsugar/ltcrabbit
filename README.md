@@ -25,5 +25,9 @@ Requirements
 
 ### Earnings
     
-    ltcrabbit-cli earnings  --apikey=<your_api_key>
+    ltcrabbit-cli earnings --apikey=<your_api_key>
+    
+### BTC Exchange Rates
+    
+    ltcrabbit-cli btc_exchange_rates --apikey=<your_api_key>
     
